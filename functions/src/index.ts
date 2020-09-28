@@ -5,7 +5,7 @@ admin.initializeApp();
 const express = require('express');
 const app = express();
 
-app.post('/', async (req: any, res: any) => {
+app.post('/add', async (req: any, res: any) => {
     const user = req.body.user;
     const actionMissed = req.body.actionMissed;
     const actionShortcut = req.body.actionShortcut;
@@ -23,16 +23,12 @@ app.post('/', async (req: any, res: any) => {
             });
 
         console.log(`Data added to DB. Data Id ${writeResult.id}`);
-        res.json(
-            {
-                result: "Success",
-            });
+
+        res.json({result: "Success"});
+
     } catch (error) {
-        res.json(
-            {
-                result: `Error - ${error}`,
-            });
+        res.json({result: `Error - ${error}`,});
     }
 });
 
-exports.reports = functions.https.onRequest(app);
+exports.report = functions.https.onRequest(app);
