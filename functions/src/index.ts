@@ -5,6 +5,8 @@ admin.initializeApp();
 const express = require('express');
 const app = express();
 
+//  Todo - Figure out a way of structuring the received data
+
 app.post('/add', async (req: any, res: any) => {
     const user = req.body.user;
     const actionMissed = req.body.actionMissed;
