@@ -5,8 +5,6 @@ admin.initializeApp();
 const express = require('express');
 const app = express();
 
-//  Todo - Figure out a way of structuring the received data
-
 app.post('/add', async (req: any, res: any) => {
     const user = req.body.user;
     const actionMissed = req.body.actionMissed;
@@ -14,7 +12,6 @@ app.post('/add', async (req: any, res: any) => {
     const eventTime = req.body.eventTime;
 
     console.log("Received =>", req.body);
-
     try {
         const writeResult = await admin.firestore().collection('reports').add(
             {
@@ -23,11 +20,8 @@ app.post('/add', async (req: any, res: any) => {
                 actionShortcut: actionShortcut,
                 eventTime: eventTime,
             });
-
         console.log(`Data added to DB. Data Id ${writeResult.id}`);
-
         res.json({result: "Success"});
-
     } catch (error) {
         res.json({result: `Error - ${error}`,});
     }
